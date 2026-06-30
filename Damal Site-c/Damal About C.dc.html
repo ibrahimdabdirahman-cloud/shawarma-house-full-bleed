@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:#0A1F14;color:#fff;overflow-x:hidden;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  </style>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:200;background:rgba(10,31,20,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);padding:0 60px;display:flex;align-items:center;justify-content:space-between;height:70px">
+  <div style="display:flex;align-items:center;gap:36px">
+    <a href="Damal Menu C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Menu</a>
+    <a href="Damal About C.dc.html" style="font-size:12px;font-weight:600;color:#C9A84C;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.5);padding-bottom:2px">About</a>
+    <a href="Damal Gallery C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Gallery</a>
+    <a href="Damal Charity C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Charity</a>
+    <a href="Damal Location C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Location</a>
+  </div>
+  <a href="Damal Home C - Immersive.dc.html" style="position:absolute;left:50%;transform:translateX(-50%)">
+    <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:28px;object-fit:contain;filter:brightness(0) invert(1)">
+  </a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="Damal Account C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Sign In</a>
+    <a href="Damal Order C.dc.html" style="background:#2D6A4F;color:#fff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:10px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s" style-hover="background:#40916C">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="min-height:52vh;background:radial-gradient(ellipse 80% 60% at 50% 80%,rgba(45,106,79,0.18),transparent),linear-gradient(to bottom,#0D2419,#0A1F14);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:90px 60px 72px;border-bottom:1px solid rgba(255,255,255,0.07)">
+  <div style="font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;animation:fadeUp 0.8s 0.2s ease both">Our Story</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,92px);font-weight:600;color:#fff;line-height:0.92;margin-bottom:18px;animation:fadeUp 0.8s 0.35s ease both">About<br><span style="font-style:italic;color:rgba(255,255,255,0.4)">Damal</span></h1>
+  <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.42);max-width:500px;line-height:1.75;animation:fadeUp 0.8s 0.5s ease both">The story of a passion to bring Somalia's rich culinary heritage to the vibrant streets of East London.</p>
+</section>
+
+<!-- STORY -->
+<section style="padding:100px 60px;background:#060F0A">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:20px">Est. 2024</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:26px">Why Damal?</h2>
+      <p style="font-size:15px;line-height:1.95;color:rgba(255,255,255,0.52);margin-bottom:20px">At Damal, we pride ourselves on bringing the authentic flavours of Somalia to your table. Established with the passion to share the rich culinary traditions of our homeland, Damal offers an array of dishes that not only tantalize your taste buds but also tell a story of heritage and culture.</p>
+      <p style="font-size:15px;line-height:1.95;color:rgba(255,255,255,0.35);margin-bottom:36px">Our signature Haniid — slow-cooked lamb marinated with traditional spices — delivers an unforgettable taste experience that has made us one of East London's most loved restaurants.</p>
+      <blockquote style="font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;color:#C9A84C;border-left:2px solid rgba(201,168,76,0.4);padding-left:20px;line-height:1.6">"Bringing Flavour And Spice From Mogadishu and Hargeisa To The Vibrant Streets of East London."</blockquote>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;gap:10px">
+      <div style="grid-row:span 2;background:radial-gradient(ellipse at 40% 50%,rgba(155,68,14,0.8),rgba(78,34,6,0.9),#100600);border-radius:3px;display:flex;align-items:flex-end;padding:18px;position:relative;overflow:hidden">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:70px;font-weight:700;color:rgba(255,255,255,0.04);position:absolute;bottom:-14px;right:-4px;user-select:none;line-height:1">Damal</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);position:relative">Restaurant</div>
+      </div>
+      <div style="background:radial-gradient(ellipse at center,rgba(40,90,62,0.7),#1B3A2A);border-radius:3px;display:flex;align-items:flex-end;padding:14px">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2)">Kitchen</div>
+      </div>
+      <div style="background:radial-gradient(ellipse at center,rgba(120,70,30,0.7),#180A02);border-radius:3px;display:flex;align-items:flex-end;padding:14px">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2)">Team</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section style="padding:88px 60px;background:#0A1F14;border-top:1px solid rgba(255,255,255,0.06)">
+  <div style="max-width:1200px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:52px">
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:12px">Our Values</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,50px);font-weight:600;color:#fff">What Makes Us Different</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:36px;transition:border-color 0.25s" style-hover="border-color:rgba(201,168,76,0.3)">
+        <div style="font-size:36px;margin-bottom:18px">🍖</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#fff;margin-bottom:12px">Authentic Somali</div>
+        <div style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.45)">Every recipe rooted in the traditional culinary heritage of Somalia — the flavours of Mogadishu and Hargeisa, faithfully recreated in East London.</div>
+      </div>
+      <div style="background:rgba(201,168,76,0.07);border:1px solid rgba(201,168,76,0.2);border-radius:3px;padding:36px">
+        <div style="font-size:36px;margin-bottom:18px">✅</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#fff;margin-bottom:12px">Halal Certified</div>
+        <div style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.55)">All meat sourced from certified Halal suppliers. Our kitchen follows strict Halal preparation standards so every guest dines with confidence.</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:36px;transition:border-color 0.25s" style-hover="border-color:rgba(201,168,76,0.3)">
+        <div style="font-size:36px;margin-bottom:18px">🌍</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#fff;margin-bottom:12px">Community Roots</div>
+        <div style="font-size:14px;line-height:1.8;color:rgba(255,255,255,0.45)">Born in the heart of East London's Somali community. A gathering place for families, friends, and food lovers from all walks of life.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<section style="padding:64px 60px;background:#0D2419;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)">
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;text-align:center">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:#C9A84C;line-height:1">★ 4.9</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px">Google Rating</div>
+    </div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:#fff;line-height:1">200+</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px">Reviews</div>
+    </div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:#fff;line-height:1">2024</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px">Established</div>
+    </div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:600;color:#C9A84C;line-height:1">Halal</div>
+      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:8px">Certified</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:#060F0A;padding:80px 60px;text-align:center">
+  <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px">Come and Taste</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#fff;margin-bottom:12px">The Difference</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,0.38);margin-bottom:36px">Walk-ins welcome · Stepney Green, East London</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="Damal Menu C.dc.html" style="background:#2D6A4F;color:#fff;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:15px 40px;border-radius:2px;text-decoration:none;transition:background 0.2s" style-hover="background:#40916C">View Full Menu</a>
+    <a href="Damal Order C.dc.html" style="background:transparent;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:15px 40px;border-radius:2px;text-decoration:none;transition:border-color 0.2s" style-hover="border-color:#C9A84C">Book a Table</a>
+  </div>
+</section>
+
+<footer style="background:#030A06;padding:40px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center">
+  <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:22px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.35">
+  <p style="font-size:12px;color:rgba(255,255,255,0.15)">© 2026 Damal Restaurant · Stepney Green, East London</p>
+</footer>
+
+</x-dc>
+</body>
+</html>

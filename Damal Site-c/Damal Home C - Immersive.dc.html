@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:#0A1F14;color:#fff;overflow-x:hidden;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+    @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+    @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
+    @keyframes pulseDot{0%,100%{opacity:0.5;}50%{opacity:1;}}
+    ::-webkit-scrollbar{width:4px;}
+    ::-webkit-scrollbar-track{background:rgba(255,255,255,0.04);}
+    ::-webkit-scrollbar-thumb{background:#2D6A4F;border-radius:2px;}
+    input::placeholder{color:rgba(255,255,255,0.3);}
+    input[type=date]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:0.4;}
+    select option{background:#0A1F14;}
+  </style>
+</helmet>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:300;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(to bottom,rgba(10,31,20,0.95),transparent);backdrop-filter:blur(4px)">
+  <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9">
+  <div style="display:flex;align-items:center;gap:40px">
+    <a href="Damal Menu C.dc.html" style="font-size:12px;font-weight:500;letter-spacing:0.5px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Menu</a>
+    <a href="Damal About C.dc.html" style="font-size:12px;font-weight:500;letter-spacing:0.5px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">About</a>
+    <a href="Damal Gallery C.dc.html" style="font-size:12px;font-weight:500;letter-spacing:0.5px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Gallery</a>
+    <a href="Damal Location C.dc.html" style="font-size:12px;font-weight:500;letter-spacing:0.5px;color:rgba(255,255,255,0.65);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Location</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px">
+    <a href="Damal Account C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Sign In</a>
+    <!-- Cart button -->
+    <div onClick="{{ toggleCart }}" style="position:relative;cursor:pointer;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:10px 18px;transition:background 0.2s" style-hover="background:rgba(255,255,255,0.12)">
+      <span style="font-size:15px">🛒</span>
+      <span style="font-size:12px;font-weight:600;color:#fff">{{ cartLabel }}</span>
+      <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:-8px;right:-8px;background:#C9A84C;color:#0A1F14;font-size:10px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">{{ cartCount }}</div>
+      </sc-if>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO: Full-screen -->
+<section style="min-height:100vh;position:relative;display:flex;align-items:flex-end;overflow:hidden;background:radial-gradient(ellipse 90% 70% at 62% 36%, rgba(152,68,14,0.55) 0%, transparent 55%),radial-gradient(ellipse 60% 80% at 20% 75%, rgba(45,106,79,0.2) 0%, transparent 48%),linear-gradient(150deg,#060F0A 0%,#0F2818 40%,#060F0A 100%)">
+  <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,31,20,0.98) 0%, rgba(10,31,20,0.55) 35%, rgba(10,31,20,0.15) 65%, transparent 100%)"></div>
+  <!-- Decorative circles -->
+  <div style="position:absolute;top:15%;right:8%;width:320px;height:320px;border-radius:50%;border:1px solid rgba(201,168,76,0.08);pointer-events:none"></div>
+  <div style="position:absolute;top:18%;right:11%;width:220px;height:220px;border-radius:50%;border:1px solid rgba(201,168,76,0.06);pointer-events:none"></div>
+
+  <div style="position:relative;padding:0 60px 80px;width:100%;z-index:1">
+    <div style="max-width:700px">
+      <div style="animation:fadeIn 1s 0.3s ease both;font-size:11px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A84C;margin-bottom:20px">Ku Soo Dhawoow · East London</div>
+      <h1 style="animation:fadeUp 1s 0.45s ease both;font-family:'Cormorant Garamond',serif;font-size:clamp(72px,9.5vw,124px);font-weight:600;line-height:0.9;color:#fff;letter-spacing:-3px;margin-bottom:20px">
+        Damal<br><span style="font-style:italic;color:rgba(255,255,255,0.45);font-size:0.65em">Restaurant</span>
+      </h1>
+      <p style="animation:fadeIn 1s 0.85s ease both;font-size:15px;font-weight:300;line-height:1.75;color:rgba(255,255,255,0.52);max-width:480px;margin-bottom:44px">Authentic Somali cuisine — the flavours of Mogadishu &amp; Hargeisa, served with pride in the heart of East London.</p>
+      <div style="animation:fadeIn 1s 1.05s ease both;display:flex;gap:14px;flex-wrap:wrap">
+        <a href="#menu-c" style="background:#2D6A4F;color:#fff;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:15px 40px;border-radius:2px;text-decoration:none;transition:background 0.25s" style-hover="background:#40916C">Order Now</a>
+        <a href="#reserve-c" style="background:transparent;border:1px solid rgba(201,168,76,0.4);color:#C9A84C;font-size:12px;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;padding:15px 40px;border-radius:2px;text-decoration:none;transition:border-color 0.25s" style-hover="border-color:#C9A84C">Book a Table</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Stats overlay -->
+  <div style="position:absolute;bottom:80px;right:60px;display:flex;flex-direction:column;gap:20px;text-align:right;z-index:1;animation:fadeIn 1.2s 1.2s ease both">
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#C9A84C;line-height:1">★ 4.9</div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">Google Rating</div>
+    </div>
+    <div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;color:#fff;line-height:1">200+</div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">Reviews</div>
+    </div>
+  </div>
+
+  <!-- Video pill -->
+  <div style="position:absolute;top:50%;right:60px;transform:translateY(-50%);display:flex;align-items:center;gap:12px;cursor:pointer;z-index:1;animation:fadeIn 1s 1.4s ease both" style-hover="opacity:0.8">
+    <div style="width:56px;height:56px;background:rgba(255,255,255,0.06);border:1px solid rgba(201,168,76,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center">
+      <div style="width:0;height:0;border-top:9px solid transparent;border-bottom:9px solid transparent;border-left:15px solid #C9A84C;margin-left:4px"></div>
+    </div>
+    <div>
+      <div style="font-size:13px;color:#fff;">Watch Story</div>
+      <div style="font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">2 min</div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div style="background:#0D2419;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);padding:18px 60px;display:flex;justify-content:center;gap:0;align-items:center">
+  <div style="text-align:center;flex:1">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#C9A84C">2024</div>
+    <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">Established</div>
+  </div>
+  <div style="width:1px;height:36px;background:rgba(255,255,255,0.08)"></div>
+  <div style="text-align:center;flex:1">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#C9A84C">Halal</div>
+    <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">Certified</div>
+  </div>
+  <div style="width:1px;height:36px;background:rgba(255,255,255,0.08)"></div>
+  <div style="text-align:center;flex:1">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#C9A84C">Free</div>
+    <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">Delivery over £25</div>
+  </div>
+  <div style="width:1px;height:36px;background:rgba(255,255,255,0.08)"></div>
+  <div style="text-align:center;flex:1">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:#C9A84C">E. London</div>
+    <div style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-top:2px">Location</div>
+  </div>
+</div>
+
+<!-- MENU SECTION -->
+<section id="menu-c" style="padding:100px 60px;background:#0A1F14">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;gap:24px">
+      <div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px">Order</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(40px,5vw,60px);font-weight:600;color:#fff;line-height:1.05">The Menu</h2>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px">
+        <div style="font-size:13px;color:rgba(255,255,255,0.4)">Delivery or Collection?</div>
+        <div style="display:flex;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;border:1px solid rgba(255,255,255,0.1)">
+          <div onClick="{{ setDelivery }}" style="padding:9px 20px;font-size:12px;font-weight:600;cursor:pointer;background:{{ deliveryBg }};color:{{ deliveryColor }};transition:all 0.2s">Delivery</div>
+          <div onClick="{{ setCollection }}" style="padding:9px 20px;font-size:12px;font-weight:600;cursor:pointer;background:{{ collectionBg }};color:{{ collectionColor }};transition:all 0.2s">Collection</div>
+        </div>
+      </div>
+    </div>
+    <!-- Category Pills -->
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.07)">
+      <sc-for list="{{ catBtns }}" as="btn" hint-placeholder-count="7">
+        <button onClick="{{ btn.onClick }}" style="background:{{ btn.bg }};color:{{ btn.color }};border:{{ btn.border }};border-radius:20px;padding:9px 22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;letter-spacing:0.3px;cursor:pointer;transition:all 0.22s">{{ btn.label }}</button>
+      </sc-for>
+    </div>
+    <!-- Menu Items: 2-col list -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <sc-for list="{{ menuItems }}" as="item" hint-placeholder-count="6">
+        <div style="display:flex;align-items:center;gap:18px;padding:20px 24px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.04);transition:background 0.2s" style-hover="background:rgba(255,255,255,0.055)">
+          <div style="width:72px;height:72px;border-radius:3px;background:{{ item.gradient }};flex-shrink:0;position:relative;overflow:hidden">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center">
+              <div style="font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.18)">photo</div>
+            </div>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:3px">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ item.name }}</div>
+              <sc-if value="{{ item.hasTag }}" hint-placeholder-val="{{ false }}">
+                <div style="flex-shrink:0;background:#C9A84C;color:#0A1F14;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap">{{ item.tag }}</div>
+              </sc-if>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.36);line-height:1.5">{{ item.desc }}</div>
+          </div>
+          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#C9A84C">{{ item.priceStr }}</div>
+            <div onClick="{{ item.onAdd }}" style="width:34px;height:34px;background:#2D6A4F;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s,transform 0.15s;font-size:18px;color:#fff;font-weight:300;line-height:1" style-hover="background:#40916C;transform:scale(1.12)">+</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- CART DRAWER (side panel) -->
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:400;display:flex">
+    <div onClick="{{ toggleCart }}" style="flex:1;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px)"></div>
+    <div style="width:420px;background:#0D2419;border-left:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;animation:slideUp 0.3s ease">
+      <div style="padding:28px 28px 20px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:600;color:#fff">Your Order</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.38);margin-top:2px">{{ cartCount }} items · {{ orderType }}</div>
+        </div>
+        <div onClick="{{ toggleCart }}" style="cursor:pointer;width:36px;height:36px;border:1px solid rgba(255,255,255,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,0.5);transition:all 0.2s" style-hover="border-color:rgba(255,255,255,0.35);color:#fff">✕</div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:20px 28px">
+        <sc-for list="{{ cartItems }}" as="ci" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:500;color:#fff;margin-bottom:2px">{{ ci.name }}</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.38)">{{ ci.priceStr }} each</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div onClick="{{ ci.onRemove }}" style="width:28px;height:28px;border:1px solid rgba(255,255,255,0.14);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:rgba(255,255,255,0.5);transition:all 0.2s" style-hover="border-color:#C9A84C;color:#C9A84C">−</div>
+              <div style="font-size:14px;font-weight:600;color:#fff;min-width:16px;text-align:center">{{ ci.qty }}</div>
+              <div onClick="{{ ci.onAdd }}" style="width:28px;height:28px;background:#2D6A4F;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:#fff;transition:background 0.2s" style-hover="background:#40916C">+</div>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#C9A84C;min-width:52px;text-align:right">{{ ci.lineStr }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:20px 28px;border-top:1px solid rgba(255,255,255,0.07)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.45)">Subtotal</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff">{{ cartTotal }}</span>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.28);margin-bottom:20px">Free delivery on orders over £25 · 30–40 min</div>
+        <button style="width:100%;background:#2D6A4F;color:#fff;border:none;border-radius:2px;padding:16px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background 0.2s;margin-bottom:10px" style-hover="background:#40916C">Checkout → {{ cartTotal }}</button>
+        <button onClick="{{ clearCart }}" style="width:100%;background:transparent;color:rgba(255,255,255,0.3);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:10px;font-family:'DM Sans',sans-serif;font-size:11px;cursor:pointer;transition:all 0.2s" style-hover="border-color:rgba(255,255,255,0.25);color:rgba(255,255,255,0.55)">Clear Order</button>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- HANIID FEATURE -->
+<section style="display:grid;grid-template-columns:1fr 1fr;min-height:560px">
+  <div style="background:#0D2419;padding:80px 70px;display:flex;flex-direction:column;justify-content:center">
+    <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:20px">Must Try</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(52px,6vw,76px);font-weight:600;color:#fff;line-height:0.95;margin-bottom:12px">Haniid</h2>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-style:italic;color:rgba(255,255,255,0.4);margin-bottom:28px">Lamb Shank · Slow Cooked</div>
+    <p style="font-size:14px;line-height:1.9;color:rgba(255,255,255,0.52);margin-bottom:36px;max-width:380px">Hours of slow cooking. A blend of traditional Somali spices. Served with your choice of rice or pasta. This is the dish East London is talking about.</p>
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:36px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#C9A84C">£13</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.3)">with rice or pasta</div>
+    </div>
+    <button style="align-self:flex-start;background:#2D6A4F;color:#fff;border:none;border-radius:2px;padding:14px 34px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:background 0.2s" style-hover="background:#40916C" onClick="{{ addHaniid }}">Add to Order</button>
+  </div>
+  <div style="background:radial-gradient(ellipse 78% 82% at 44% 48%, rgba(158,72,16,0.94) 0%, rgba(88,38,8,0.9) 44%, #160802 100%);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:130px;font-weight:700;color:rgba(255,255,255,0.05);line-height:1;user-select:none;position:absolute">Haniid</div>
+    <div style="position:absolute;top:24px;right:24px;background:#C9A84C;color:#0A1F14;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:2px">Signature Dish</div>
+    <div style="position:absolute;bottom:20px;left:22px;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2)">food photography</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about-c" style="padding:110px 60px;background:#060F0A">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:24px">Our Story</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4.5vw,56px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:28px">"A taste of home, served with pride in East London"</h2>
+      <p style="font-size:14px;line-height:1.95;color:rgba(255,255,255,0.5);margin-bottom:24px">At Damal, we pride ourselves on bringing the authentic flavours of Somalia to your table. Established with the passion to share the rich culinary traditions of our homeland, every dish tells a story of heritage and culture.</p>
+      <p style="font-size:14px;line-height:1.95;color:rgba(255,255,255,0.4);margin-bottom:36px">Our signature dish, Haniid, is a must-try. This succulent, slow-cooked lamb is marinated with a blend of traditional spices, delivering an unforgettable taste experience.</p>
+      <a href="Damal About C.dc.html" style="font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:#C9A84C;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);padding-bottom:3px;transition:opacity 0.2s" style-hover="opacity:0.65">Read Our Full Story →</a>
+    </div>
+    <!-- Photo grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:200px 200px;gap:10px">
+      <div style="background:radial-gradient(ellipse at 40% 60%, #2D5E3F, #122415);border-radius:3px;grid-row:span 2;display:flex;align-items:flex-end;padding:16px;overflow:hidden;position:relative">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:60px;font-weight:700;color:rgba(255,255,255,0.05);position:absolute;bottom:-12px;right:-4px;user-select:none;line-height:1">Damal</div>
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2);position:relative">Restaurant</div>
+      </div>
+      <div style="background:radial-gradient(ellipse at center, rgba(155,70,15,0.8), #1A0A02);border-radius:3px;display:flex;align-items:flex-end;padding:16px">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2)">Kitchen</div>
+      </div>
+      <div style="background:radial-gradient(ellipse at center, rgba(80,55,30,0.8), #180F05);border-radius:3px;display:flex;align-items:flex-end;padding:16px">
+        <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.2)">Team</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery-c" style="padding:100px 60px;background:#0A1F14">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:44px">
+      <div>
+        <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px">Gallery</div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,52px);font-weight:600;color:#fff;line-height:1">@damalrestaurant</h2>
+      </div>
+      <a href="Damal Gallery C.dc.html" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.12);padding-bottom:3px;transition:color 0.2s" style-hover="color:#fff">View All →</a>
+    </div>
+    <div style="display:grid;grid-template-columns:1.7fr 1fr 1fr;grid-template-rows:220px 220px;gap:10px">
+      <div style="grid-row:span 2;background:radial-gradient(ellipse 70% 80% at 40% 50%, rgba(155,68,14,0.85), rgba(80,36,6,0.9), #0F0500);border-radius:3px;position:relative;overflow:hidden;cursor:pointer;transition:opacity 0.2s" style-hover="opacity:0.85">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(10,31,20,0.6) 0%, transparent 50%)"></div>
+        <div style="position:absolute;bottom:18px;left:18px;font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-style:italic">Haniid — Lamb Shank</div>
+      </div>
+      <div style="background:radial-gradient(ellipse at center, rgba(45,106,79,0.7), #0A1F14);border-radius:3px;cursor:pointer;transition:opacity 0.2s" style-hover="opacity:0.8;"></div>
+      <div style="background:radial-gradient(ellipse at center, rgba(140,60,15,0.7), #100500);border-radius:3px;cursor:pointer;transition:opacity 0.2s" style-hover="opacity:0.8"></div>
+      <div style="background:radial-gradient(ellipse at center, rgba(100,75,40,0.7), #180E04);border-radius:3px;cursor:pointer;transition:opacity 0.2s" style-hover="opacity:0.8"></div>
+      <div style="background:radial-gradient(ellipse at center, rgba(30,80,55,0.7), #081510);border-radius:3px;cursor:pointer;transition:opacity 0.2s" style-hover="opacity:0.8"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="padding:100px 60px;background:#060F0A;text-align:center">
+  <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:28px">Reviews</div>
+  <div style="font-size:18px;color:#C9A84C;margin-bottom:32px;letter-spacing:5px">★★★★★</div>
+  <blockquote style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,36px);font-style:italic;color:#fff;max-width:720px;margin:0 auto 20px;line-height:1.5;min-height:100px;display:flex;align-items:center;justify-content:center">"{{ currentTestimonial.text }}"</blockquote>
+  <div style="font-size:11px;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:44px">— {{ currentTestimonial.author }}</div>
+  <div style="display:flex;justify-content:center;gap:12px">
+    <sc-for list="{{ dots }}" as="dot" hint-placeholder-count="3">
+      <div onClick="{{ dot.onClick }}" style="width:8px;height:8px;border-radius:50%;background:{{ dot.bg }};cursor:pointer;transition:background 0.4s,transform 0.2s" style-hover="transform:scale(1.4)"></div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- RESERVATION -->
+<section id="reserve-c" style="background:#0D2419;padding:90px 60px;border-top:1px solid rgba(255,255,255,0.05)">
+  <div style="max-width:960px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:52px">
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px">Reservations</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:600;color:#fff;line-height:1.05;margin-bottom:10px">Reserve Your Table</h2>
+      <p style="font-size:13px;color:rgba(255,255,255,0.38)">Walk-ins welcome · Booking recommended Thursday – Sunday</p>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:14px;align-items:end">
+      <div>
+        <label style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:8px">Date</label>
+        <input type="date" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:13px 14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;outline:none">
+      </div>
+      <div>
+        <label style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:8px">Time</label>
+        <input type="time" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:13px 14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;outline:none">
+      </div>
+      <div>
+        <label style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:8px">Guests</label>
+        <select style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:13px 14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;outline:none;appearance:none">
+          <option>2</option><option>3</option><option>4</option><option>5</option><option>6+</option>
+        </select>
+      </div>
+      <div>
+        <label style="font-size:9px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);display:block;margin-bottom:8px">Name</label>
+        <input type="text" placeholder="Your name" style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:2px;padding:13px 14px;color:#fff;font-family:'DM Sans',sans-serif;font-size:13px;outline:none">
+      </div>
+      <button style="background:#C9A84C;color:#0A1F14;border:none;border-radius:2px;padding:14px 26px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:background 0.2s" style-hover="background:#E9D283">Book Now</button>
+    </div>
+  </div>
+</section>
+
+<!-- BANQUETING -->
+<section style="background:#0A1F14;padding:64px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;align-items:center;gap:60px;justify-content:center">
+  <img src="https://damalrestaurant.uk/wp-content/uploads/2024/11/DB-Logo-150x150.png" alt="Damal Banqueting" style="width:68px;height:68px;object-fit:contain;opacity:0.7">
+  <div>
+    <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#C9A84C;margin-bottom:10px">Sister Venue</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;color:#fff;margin-bottom:8px">Damal Banqueting</div>
+    <div style="font-size:14px;color:rgba(255,255,255,0.38);margin-bottom:16px;max-width:460px">Private events, weddings &amp; corporate dining — East London's premier Somali banqueting hall</div>
+    <a href="https://www.damalbanqueting.com" target="_blank" style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.4);padding-bottom:3px;transition:opacity 0.2s" style-hover="opacity:0.65" rel="noopener">Visit Damal Banqueting →</a>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location-c" style="background:#060F0A;padding:100px 60px">
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:center">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:18px">Find Us</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,50px);font-weight:600;color:#fff;line-height:1.1;margin-bottom:36px">Opening Hours</h2>
+      <div style="border-top:1px solid rgba(255,255,255,0.07)">
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+          <span style="font-size:14px;color:rgba(255,255,255,0.45)">Monday – Thursday</span>
+          <span style="font-size:14px;font-weight:600;color:#fff">9:00am – 11:00pm</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+          <span style="font-size:14px;color:rgba(255,255,255,0.45)">Friday – Saturday</span>
+          <span style="font-size:14px;font-weight:600;color:#C9A84C">9:00am – 11:00pm</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+          <span style="font-size:14px;color:rgba(255,255,255,0.45)">Sunday</span>
+          <span style="font-size:14px;font-weight:600;color:#fff">9:00am – 11:00pm</span>
+        </div>
+      </div>
+      <div style="margin-top:36px;display:flex;flex-direction:column;gap:14px">
+        <div style="font-size:14px;color:rgba(255,255,255,0.42);display:flex;gap:12px"><span style="color:#2D6A4F">📍</span>110 Mile End Road, London, E1 4UN</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.42);display:flex;gap:12px"><span style="color:#2D6A4F">📞</span>020 7790 0284</div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.42);display:flex;gap:12px"><span style="color:#2D6A4F">✉</span>enquiries@damalrestaurant.uk</div>
+      </div>
+    </div>
+    <div style="background:radial-gradient(ellipse at 45% 48%, #1B3A2A, #0A1F14);height:400px;border-radius:4px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:90px;font-weight:700;color:rgba(255,255,255,0.03);position:absolute;bottom:-16px;user-select:none">LONDON</div>
+      <div style="font-size:36px;position:relative">📍</div>
+      <div style="text-align:center;position:relative">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;margin-bottom:6px">Damal Restaurant</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.35);font-style:italic">Stepney Green · East London</div>
+      </div>
+      <a href="https://maps.google.com/?q=Damal+Restaurant+110+Mile+End+Road+London+E1+4UN" target="_blank" rel="noopener" style="position:relative;background:#C9A84C;color:#0A1F14;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:10px 24px;border-radius:2px;text-decoration:none;margin-top:6px;transition:background 0.2s" style-hover="background:#E9D283">Get Directions</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:#030A06;padding:68px 60px 32px">
+  <div style="display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:60px;max-width:1280px;margin:0 auto;padding-bottom:56px;border-bottom:1px solid rgba(255,255,255,0.04)">
+    <div>
+      <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:24px;object-fit:contain;opacity:0.45;margin-bottom:20px;display:block;filter:brightness(0) invert(1)">
+      <p style="font-size:13px;line-height:1.85;color:rgba(255,255,255,0.2);max-width:200px;margin-bottom:28px">Authentic Somali cuisine in the heart of East London.</p>
+      <div style="display:flex;gap:16px">
+        <a href="https://www.instagram.com/damalrestaurant/" target="_blank" rel="noopener" style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.2s" style-hover="color:#C9A84C">IG</a>
+        <a href="https://www.tiktok.com/@damalrestaurant" target="_blank" rel="noopener" style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.2s" style-hover="color:#C9A84C">TT</a>
+        <a aria-disabled="true" tabindex="-1" style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,0.22);text-decoration:none;transition:color 0.2s" style-hover="color:#C9A84C">FB</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.14);margin-bottom:20px">Navigate</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <a href="Damal Menu C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Menu</a>
+        <a href="Damal About C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">About</a>
+        <a href="Damal Gallery C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Gallery</a>
+        <a href="Damal Charity C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Charity</a>
+        <a href="Damal Location C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Location</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.14);margin-bottom:20px">Order</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <a href="Damal Order C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Order Online</a>
+        <a href="Damal Order C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Book a Table</a>
+        <a href="Damal Account C.dc.html" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Loyalty Rewards</a>
+        <a href="https://www.damalbanqueting.com" target="_blank" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff" rel="noopener">Damal Banqueting</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.14);margin-bottom:20px">Legal</div>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <a href="https://damalrestaurant.uk/privacy-policy/" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Privacy Policy</a>
+        <a href="https://damalrestaurant.uk/cookie-policy-uk/" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Cookie Policy</a>
+        <a href="https://damalrestaurant.uk/terms-and-conditions/" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.32);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Terms &amp; Conditions</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1280px;margin:26px auto 0;display:flex;justify-content:space-between">
+    <p style="font-size:12px;color:rgba(255,255,255,0.14)">© 2026 Damal Restaurant. All rights reserved.</p>
+    <p style="font-size:12px;color:rgba(255,255,255,0.1)">Stepney Green, East London</p>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    activeCategory: 'all',
+    orderMode: 'delivery',
+    cart: [],
+    cartOpen: false,
+    testimonialIndex: 0
+  };
+
+  get allItems() {
+    return [
+      { id:1,  cat:'breakfast', name:'Ful Medames',           desc:'Fava beans with Somali herbs & spices',              price:6,     tag:'vegetarian' },
+      { id:2,  cat:'breakfast', name:'Lamb Kidney',           desc:'Traditional Somali breakfast',                       price:7,     tag:'' },
+      { id:3,  cat:'breakfast', name:'Beef Sogaar & Bread',   desc:'Spiced beef with freshly baked bread',               price:7,     tag:'' },
+      { id:4,  cat:'mains',     name:'Haniid',                desc:'Slow-cooked lamb shank — our signature dish',        price:13,    tag:'signature' },
+      { id:5,  cat:'mains',     name:'Quarter Chicken',       desc:'Served with rice or pasta',                          price:9,     tag:'' },
+      { id:6,  cat:'mains',     name:'Salmon Fish',           desc:'Served with rice or pasta',                          price:11,    tag:'' },
+      { id:7,  cat:'mains',     name:'Beef Sogaar',           desc:'Served with rice or pasta',                          price:10,    tag:'' },
+      { id:8,  cat:'mains',     name:'Chicken Sogaar',        desc:'Served with rice or pasta',                          price:10,    tag:'' },
+      { id:9,  cat:'mains',     name:'Beef Steak',            desc:'Served with rice or pasta',                          price:11,    tag:'' },
+      { id:10, cat:'mains',     name:'Chicken Steak',         desc:'Served with rice or pasta',                          price:11,    tag:'' },
+      { id:11, cat:'platters',  name:'1–2 People Platter',    desc:'Lambshank, Quarter Chicken, Beef Sogaar',            price:30.99, tag:'serves 1–2' },
+      { id:12, cat:'platters',  name:'2–3 People Platter',    desc:'Lambshank ×2, Quarter Chicken, Beef Sogaar',         price:38.99, tag:'serves 2–3' },
+      { id:13, cat:'platters',  name:'4–5 People Platter',    desc:'Lambshank ×3, Quarter Chicken, Beef Sogaar',         price:49.99, tag:'serves 4–5' },
+      { id:14, cat:'platters',  name:'Mega Fusion Platter',   desc:'Lambshank ×5, Quarter Chicken ×3, Beef Sogaar',      price:79.99, tag:'feeds 6+' },
+      { id:15, cat:'sides',     name:'Sabaayad',              desc:'Somali flatbread, similar to Paratha',               price:2,     tag:'' },
+      { id:16, cat:'sides',     name:'Canjeero',              desc:'Spongy pancake-like bread',                          price:2,     tag:'' },
+      { id:17, cat:'sides',     name:'Malwaax',               desc:'Traditional sweet Somali pancake',                   price:1,     tag:'sweet' },
+      { id:18, cat:'sides',     name:'Sambusa',               desc:'Crispy pastry with spiced meat filling',             price:1.50,  tag:'' },
+      { id:19, cat:'sides',     name:'Rice',                  desc:'',                                                   price:6,     tag:'' },
+      { id:20, cat:'sides',     name:'Pasta',                 desc:'',                                                   price:6,     tag:'' },
+      { id:21, cat:'drinks',    name:'Mango Lassi',           desc:'Our signature drink',                                price:3.50,  tag:'signature' },
+      { id:22, cat:'drinks',    name:'Shani',                 desc:'Berry-flavoured carbonated drink',                   price:2,     tag:'' },
+      { id:23, cat:'drinks',    name:'Soft Drinks',           desc:'Fanta, Sprite, Rio, Rubicon',                        price:1.50,  tag:'' },
+      { id:24, cat:'drinks',    name:'Juices',                desc:'Mango, Guava, Cocktail',                             price:2,     tag:'' },
+      { id:25, cat:'drinks',    name:'Somali Tea',            desc:'Traditional spiced tea',                             price:1.50,  tag:'' },
+      { id:26, cat:'drinks',    name:'Cappuccino / Coffee',   desc:'',                                                   price:2,     tag:'' },
+      { id:27, cat:'desserts',  name:'Oreo Milk Cake',        desc:'',                                                   price:5,     tag:'' },
+      { id:28, cat:'desserts',  name:'Lotus Biscoff Cake',    desc:'',                                                   price:5,     tag:'' },
+      { id:29, cat:'desserts',  name:'Kinder Bueno Cake',     desc:'',                                                   price:5,     tag:'' },
+      { id:30, cat:'desserts',  name:'Ferrero Rocher Cake',   desc:'',                                                   price:5,     tag:'' }
+    ];
+  }
+
+  gradients = {
+    breakfast: 'radial-gradient(ellipse at center, rgba(175,94,26,0.88), rgba(78,34,6,0.94), #0E0600)',
+    mains:     'radial-gradient(ellipse at center, rgba(134,54,14,0.88), rgba(56,20,2,0.94), #0C0402)',
+    platters:  'radial-gradient(ellipse at center, rgba(154,94,14,0.88), rgba(74,44,0,0.94), #0E0800)',
+    sides:     'radial-gradient(ellipse at center, rgba(92,70,40,0.88), rgba(44,30,10,0.94), #160E04)',
+    drinks:    'radial-gradient(ellipse at center, rgba(40,100,72,0.88), rgba(22,52,36,0.94), #060E08)',
+    desserts:  'radial-gradient(ellipse at center, rgba(172,112,36,0.88), rgba(96,56,16,0.94), #160600)'
+  };
+
+  componentDidMount() {
+    try { const s = localStorage.getItem('damal_cart'); if (s) this.setState({ cart: JSON.parse(s) }); } catch(e) {}
+    this._timer = setInterval(() => {
+      this.setState(s => ({ testimonialIndex: (s.testimonialIndex + 1) % 3 }));
+    }, 5500);
+  }
+
+  componentDidUpdate(_, prev) {
+    if (prev.cart !== this.state.cart) {
+      try { localStorage.setItem('damal_cart', JSON.stringify(this.state.cart)); } catch(e) {}
+    }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this._timer);
+  }
+
+  fmt(price) {
+    return `£${Number.isInteger(price) ? price : price.toFixed(2)}`;
+  }
+
+  addItem(item) {
+    this.setState(s => {
+      const existing = s.cart.find(c => c.id === item.id);
+      if (existing) {
+        return { cart: s.cart.map(c => c.id === item.id ? { ...c, qty: c.qty + 1 } : c) };
+      }
+      return { cart: [...s.cart, { ...item, qty: 1 }] };
+    });
+  }
+
+  removeItem(id) {
+    this.setState(s => {
+      const item = s.cart.find(c => c.id === id);
+      if (!item) return {};
+      if (item.qty <= 1) return { cart: s.cart.filter(c => c.id !== id) };
+      return { cart: s.cart.map(c => c.id === id ? { ...c, qty: c.qty - 1 } : c) };
+    });
+  }
+
+  get cartTotal() {
+    return this.state.cart.reduce((s, i) => s + i.price * i.qty, 0);
+  }
+
+  get cartCount() {
+    return this.state.cart.reduce((s, i) => s + i.qty, 0);
+  }
+
+  renderVals() {
+    const { activeCategory, orderMode, cartOpen, testimonialIndex } = this.state;
+    const cats = ['all','breakfast','mains','platters','sides','drinks','desserts'];
+
+    const catBtns = cats.map(cat => ({
+      label: cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1),
+      active: activeCategory === cat,
+      bg: activeCategory === cat ? '#C9A84C' : 'rgba(255,255,255,0.06)',
+      color: activeCategory === cat ? '#0A1F14' : 'rgba(255,255,255,0.55)',
+      border: activeCategory === cat ? '1.5px solid #C9A84C' : '1.5px solid rgba(255,255,255,0.08)',
+      onClick: () => this.setState({ activeCategory: cat })
+    }));
+
+    const filtered = activeCategory === 'all' ? this.allItems : this.allItems.filter(i => i.cat === activeCategory);
+    const menuItems = filtered.map(item => ({
+      ...item,
+      priceStr: this.fmt(item.price),
+      hasTag: item.tag !== '',
+      gradient: this.gradients[item.cat] || this.gradients.mains,
+      onAdd: () => this.addItem(item)
+    }));
+
+    const cartCount = this.cartCount;
+    const cartTotal = this.cartTotal;
+    const cartItems = this.state.cart.map(ci => ({
+      ...ci,
+      priceStr: this.fmt(ci.price),
+      lineStr: this.fmt(ci.price * ci.qty),
+      onAdd: () => this.addItem(ci),
+      onRemove: () => this.removeItem(ci.id)
+    }));
+
+    const testimonials = [
+      { text: "The Haniid is absolutely incredible — the most tender slow-cooked lamb I've had in all of London!", author: "Amina K." },
+      { text: "Authentic Somali flavours that taste just like home. The platters are incredible value for the whole family.", author: "Mohamed S." },
+      { text: "The Mango Lassi is the perfect signature drink. Amazing food, warm atmosphere, the friendliest staff.", author: "Faadumo H." }
+    ];
+
+    return {
+      catBtns,
+      menuItems,
+      cartCount,
+      cartTotal: this.fmt(cartTotal),
+      cartItems,
+      hasCart: cartCount > 0,
+      cartLabel: cartCount > 0 ? `${cartCount} item${cartCount > 1 ? 's' : ''} · ${this.fmt(cartTotal)}` : 'Cart',
+      cartOpen,
+      orderType: orderMode === 'delivery' ? 'Delivery' : 'Collection',
+      toggleCart: () => this.setState(s => ({ cartOpen: !s.cartOpen })),
+      clearCart: () => this.setState({ cart: [], cartOpen: false }),
+      orderMode,
+      deliveryBg: orderMode === 'delivery' ? '#2D6A4F' : 'transparent',
+      deliveryColor: orderMode === 'delivery' ? '#fff' : 'rgba(255,255,255,0.45)',
+      collectionBg: orderMode === 'collection' ? '#2D6A4F' : 'transparent',
+      collectionColor: orderMode === 'collection' ? '#fff' : 'rgba(255,255,255,0.45)',
+      setDelivery: () => this.setState({ orderMode: 'delivery' }),
+      setCollection: () => this.setState({ orderMode: 'collection' }),
+      addHaniid: () => this.addItem(this.allItems.find(i => i.id === 4)),
+      currentTestimonial: testimonials[testimonialIndex],
+      dots: testimonials.map((_, i) => ({
+        bg: i === testimonialIndex ? '#C9A84C' : 'rgba(255,255,255,0.18)',
+        onClick: () => this.setState({ testimonialIndex: i })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

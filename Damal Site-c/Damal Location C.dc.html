@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}body{font-family:'DM Sans',sans-serif;background:#0A1F14;color:#fff;overflow-x:hidden;}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+  </style>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:200;background:rgba(10,31,20,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.07);padding:0 60px;display:flex;align-items:center;justify-content:space-between;height:70px">
+  <div style="display:flex;align-items:center;gap:36px">
+    <a href="Damal Menu C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Menu</a>
+    <a href="Damal About C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">About</a>
+    <a href="Damal Gallery C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Gallery</a>
+    <a href="Damal Charity C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Charity</a>
+    <a href="Damal Location C.dc.html" style="font-size:12px;font-weight:600;color:#C9A84C;text-decoration:none;border-bottom:1px solid rgba(201,168,76,0.5);padding-bottom:2px">Location</a>
+  </div>
+  <a href="Damal Home C - Immersive.dc.html" style="position:absolute;left:50%;transform:translateX(-50%)">
+    <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:28px;object-fit:contain;filter:brightness(0) invert(1)">
+  </a>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="Damal Account C.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Sign In</a>
+    <a href="Damal Order C.dc.html" style="background:#2D6A4F;color:#fff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:10px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s" style-hover="background:#40916C">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:90px 60px 70px;background:linear-gradient(to bottom,#0D2419,#0A1F14);text-align:center;border-bottom:1px solid rgba(255,255,255,0.07)">
+  <div style="font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px;animation:fadeUp 0.8s 0.2s ease both">Stepney Green · East London</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,92px);font-weight:600;color:#fff;line-height:0.92;margin-bottom:14px;animation:fadeUp 0.8s 0.35s ease both">Find Us</h1>
+  <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.38);max-width:400px;margin:0 auto;animation:fadeUp 0.8s 0.5s ease both">Open every day. Walk-ins welcome, bookings recommended at weekends.</p>
+</section>
+
+<!-- MAP PLACEHOLDER -->
+<div style="background:radial-gradient(ellipse 80% 70% at 50% 55%,rgba(45,106,79,0.25),rgba(10,31,20,0.8),#060F0A);height:420px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;position:relative;overflow:hidden;border-bottom:1px solid rgba(255,255,255,0.06)">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:100px;font-weight:700;color:rgba(255,255,255,0.03);position:absolute;bottom:-18px;user-select:none;letter-spacing:-4px">EAST LONDON</div>
+  <div style="position:relative;font-size:44px">📍</div>
+  <div style="text-align:center;position:relative">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff;margin-bottom:6px">Damal Restaurant</div>
+    <div style="font-size:13px;color:rgba(255,255,255,0.42)">110 Mile End Road, London, E1 4UN</div>
+  </div>
+  <a href="https://maps.google.com/?q=Damal+Restaurant+110+Mile+End+Road+London+E1+4UN" target="_blank" style="position:relative;background:#C9A84C;color:#0A1F14;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;border-radius:2px;text-decoration:none;margin-top:4px;transition:background 0.2s" style-hover="background:#E9D283" rel="noopener">Open in Google Maps</a>
+</div>
+
+<!-- HOURS + CONTACT -->
+<section style="padding:88px 60px;background:#060F0A">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px">
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:18px">Hours</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,46px);font-weight:600;color:#fff;margin-bottom:36px">Opening Times</h2>
+      <div style="border-top:1px solid rgba(255,255,255,0.07)">
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+          <span style="font-size:14px;color:rgba(255,255,255,0.45)">Monday – Thursday</span>
+          <span style="font-size:14px;font-weight:600;color:#fff">9:00am – 11:00pm</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+          <span style="font-size:14px;color:rgba(255,255,255,0.45)">Friday – Saturday</span>
+          <span style="font-size:14px;font-weight:700;color:#C9A84C">9:00am – 11:00pm</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(255,255,255,0.07)">
+          <span style="font-size:14px;color:rgba(255,255,255,0.45)">Sunday</span>
+          <span style="font-size:14px;font-weight:600;color:#fff">9:00am – 11:00pm</span>
+        </div>
+      </div>
+      <div style="margin-top:22px;background:rgba(45,106,79,0.12);border:1px solid rgba(45,106,79,0.25);border-radius:2px;padding:14px 18px;font-size:13px;color:rgba(255,255,255,0.55);display:flex;align-items:center;gap:10px">
+        🕐 Kitchen closes 30 minutes before closing time
+      </div>
+    </div>
+    <div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:18px">Contact</div>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,46px);font-weight:600;color:#fff;margin-bottom:36px">Get in Touch</h2>
+      <div style="display:flex;flex-direction:column;gap:10px;margin-bottom:36px">
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:3px;transition:border-color 0.2s" style-hover="border-color:rgba(201,168,76,0.3)">
+          <span style="font-size:18px;flex-shrink:0;margin-top:2px">📍</span>
+          <div><div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:4px">Address</div><div style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.6">110 Mile End Road, London, E1 4UN</div></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:3px;transition:border-color 0.2s" style-hover="border-color:rgba(201,168,76,0.3)">
+          <span style="font-size:18px;flex-shrink:0;margin-top:2px">📞</span>
+          <div><div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:4px">Phone</div><a href="tel:02077900284" style="font-size:14px;color:rgba(255,255,255,0.7);text-decoration:none">020 7790 0284</a></div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:14px;padding:18px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);border-radius:3px;transition:border-color 0.2s" style-hover="border-color:rgba(201,168,76,0.3)">
+          <span style="font-size:18px;flex-shrink:0;margin-top:2px">✉</span>
+          <div><div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:4px">Email</div><a href="mailto:enquiries@damalrestaurant.uk" style="font-size:14px;color:rgba(255,255,255,0.7);text-decoration:none">enquiries@damalrestaurant.uk</a></div>
+        </div>
+      </div>
+      <div style="font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.28);margin-bottom:12px">🚇 Getting Here</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="font-size:13px;color:rgba(255,255,255,0.42);display:flex;gap:10px"><span style="color:#2D6A4F;font-weight:600">Tube</span>Stepney Green station — 3 min walk</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.42);display:flex;gap:10px"><span style="color:#2D6A4F;font-weight:600">Bus</span>Routes 25, 106, 205, 254</div>
+        <div style="font-size:13px;color:rgba(255,255,255,0.42);display:flex;gap:10px"><span style="color:#2D6A4F;font-weight:600">Parking</span>NCP Commercial Road (5 min walk)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section style="background:#0D2419;padding:64px 60px;text-align:center;border-top:1px solid rgba(255,255,255,0.06)">
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;margin-bottom:10px">Ready to Visit?</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,0.38);margin-bottom:32px">Walk-ins welcome · Bookings recommended Thursday – Sunday</p>
+  <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="Damal Order C.dc.html" style="background:#C9A84C;color:#0A1F14;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:15px 40px;border-radius:2px;text-decoration:none;transition:background 0.2s" style-hover="background:#E9D283">Book a Table</a>
+    <a href="Damal Order C.dc.html" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:rgba(255,255,255,0.7);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:15px 40px;border-radius:2px;text-decoration:none;transition:all 0.2s" style-hover="border-color:#fff;color:#fff">Order Online</a>
+  </div>
+</section>
+
+<footer style="background:#030A06;padding:40px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center">
+  <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:22px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.35">
+  <p style="font-size:12px;color:rgba(255,255,255,0.15)">© 2026 Damal Restaurant · Stepney Green, East London</p>
+</footer>
+
+</x-dc>
+</body>
+</html>

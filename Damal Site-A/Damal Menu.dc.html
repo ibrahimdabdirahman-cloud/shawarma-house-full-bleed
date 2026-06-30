@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:#0A1F14;color:#fff;overflow-x:hidden;}
+    @keyframes slideLeft{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+    input::placeholder{color:rgba(255,255,255,0.3);}
+    ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#2D6A4F;border-radius:2px;}
+  </style>
+</helmet>
+
+<!-- NAV -->
+<nav style="position:fixed;top:0;left:0;right:0;z-index:300;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(10,31,20,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.06)">
+  <a href="Damal Home A - Cinematic.dc.html" style="display:flex;align-items:center">
+    <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:28px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.9">
+  </a>
+  <div style="display:flex;align-items:center;gap:36px">
+    <a href="Damal Menu.dc.html" style="font-size:12px;font-weight:600;color:#C9A84C;text-decoration:none;border-bottom:1px solid #C9A84C;padding-bottom:2px">Menu</a>
+    <a href="Damal About.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">About</a>
+    <a href="Damal Gallery.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Gallery</a>
+    <a href="Damal Charity.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Charity</a>
+    <a href="Damal Location.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.55);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Location</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:14px">
+    <a href="Damal Account.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Sign In</a>
+    <div onClick="{{ toggleCart }}" style="position:relative;cursor:pointer;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:2px;padding:9px 16px;transition:background 0.2s" style-hover="background:rgba(255,255,255,0.12)">
+      <span>🛒</span>
+      <span style="font-size:12px;font-weight:600">{{ cartLabel }}</span>
+      <sc-if value="{{ hasCart }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;top:-8px;right:-8px;background:#C9A84C;color:#0A1F14;font-size:10px;font-weight:700;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center">{{ cartCount }}</div>
+      </sc-if>
+    </div>
+    <a href="Damal Order.dc.html" style="background:#2D6A4F;color:#fff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:10px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s" style-hover="background:#40916C">Order Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="padding:140px 60px 80px;background:linear-gradient(to bottom,#060F0A,#0A1F14);text-align:center;border-bottom:1px solid rgba(255,255,255,0.06)">
+  <div style="font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px">Damal Restaurant</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(56px,7vw,88px);font-weight:600;color:#fff;line-height:0.95;margin-bottom:16px">The Menu</h1>
+  <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.45);max-width:440px;margin:0 auto;line-height:1.7">All dishes are prepared fresh daily. Mains served with rice or pasta. Federation (half &amp; half) +£1.</p>
+</section>
+
+<!-- PLATTERS FEATURE -->
+<section style="padding:80px 60px;background:#0A1F14;border-bottom:1px solid rgba(255,255,255,0.06)">
+  <div style="max-width:1280px;margin:0 auto">
+    <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:14px;text-align:center">Perfect for Groups</div>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;text-align:center;margin-bottom:44px">Sharing Platters</h2>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px">
+      <sc-for list="{{ platters }}" as="p" hint-placeholder-count="4">
+        <div style="background:#0D2419;border:1px solid rgba(255,255,255,0.06);border-radius:3px;overflow:hidden;transition:border-color 0.25s" style-hover="border-color:rgba(201,168,76,0.3)">
+          <div style="background:{{ p.bg }};height:140px;position:relative;display:flex;align-items:flex-end;padding:16px">
+            <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.25)">food photo</div>
+            <div style="position:absolute;top:12px;right:12px;background:#C9A84C;color:#0A1F14;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:2px">{{ p.serves }}</div>
+          </div>
+          <div style="padding:20px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:#fff;margin-bottom:6px">{{ p.name }}</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.38);line-height:1.6;margin-bottom:16px">{{ p.desc }}</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#C9A84C">{{ p.priceStr }}</div>
+              <div onClick="{{ p.onAdd }}" style="background:#2D6A4F;color:#fff;border:none;border-radius:2px;padding:8px 18px;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background 0.2s" style-hover="background:#40916C">Add</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- FULL MENU -->
+<section style="padding:80px 60px;background:#0A1F14">
+  <div style="max-width:1280px;margin:0 auto">
+    <!-- Sticky filter -->
+    <div style="position:sticky;top:70px;z-index:100;background:#0A1F14;padding:20px 0 24px;border-bottom:1px solid rgba(255,255,255,0.06);margin-bottom:40px">
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <sc-for list="{{ catBtns }}" as="btn" hint-placeholder-count="7">
+          <button onClick="{{ btn.onClick }}" style="background:{{ btn.bg }};color:{{ btn.color }};border:{{ btn.border }};border-radius:20px;padding:9px 22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.22s">{{ btn.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+    <!-- Items grid -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px">
+      <sc-for list="{{ menuItems }}" as="item" hint-placeholder-count="8">
+        <div style="display:flex;align-items:center;gap:18px;padding:20px 24px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);transition:background 0.2s" style-hover="background:rgba(255,255,255,0.05)">
+          <div style="width:72px;height:72px;border-radius:3px;background:{{ item.gradient }};flex-shrink:0;display:flex;align-items:center;justify-content:center">
+            <span style="font-size:9px;letter-spacing:1px;color:rgba(255,255,255,0.15)">photo</span>
+          </div>
+          <div style="flex:1;min-width:0">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:3px">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:#fff">{{ item.name }}</div>
+              <sc-if value="{{ item.hasTag }}" hint-placeholder-val="{{ false }}">
+                <div style="background:#C9A84C;color:#0A1F14;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:2px">{{ item.tag }}</div>
+              </sc-if>
+            </div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.35);line-height:1.5">{{ item.desc }}</div>
+          </div>
+          <div style="flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:10px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:#C9A84C">{{ item.priceStr }}</div>
+            <div onClick="{{ item.onAdd }}" style="width:34px;height:34px;background:#2D6A4F;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background 0.2s,transform 0.15s;font-size:18px;color:#fff;line-height:1" style-hover="background:#40916C;transform:scale(1.12)">+</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</section>
+
+<!-- CART DRAWER -->
+<sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;inset:0;z-index:400;display:flex">
+    <div onClick="{{ toggleCart }}" style="flex:1;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px)"></div>
+    <div style="width:420px;background:#0D2419;border-left:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;animation:slideLeft 0.3s ease">
+      <div style="padding:28px;border-bottom:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:space-between">
+        <div>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600">Your Order</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.38);margin-top:2px">{{ cartCount }} items</div>
+        </div>
+        <div onClick="{{ toggleCart }}" style="cursor:pointer;width:36px;height:36px;border:1px solid rgba(255,255,255,0.12);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;color:rgba(255,255,255,0.4);transition:all 0.2s" style-hover="color:#fff;border-color:rgba(255,255,255,0.3)">✕</div>
+      </div>
+      <div style="flex:1;overflow-y:auto;padding:20px 28px">
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center;padding:60px 0">
+            <div style="font-size:40px;margin-bottom:16px;opacity:0.3">🛒</div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:22px;color:rgba(255,255,255,0.4)">Your cart is empty</div>
+            <div style="font-size:13px;color:rgba(255,255,255,0.22);margin-top:8px">Add something delicious</div>
+          </div>
+        </sc-if>
+        <sc-for list="{{ cartItems }}" as="ci" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:500;margin-bottom:2px">{{ ci.name }}</div>
+              <div style="font-size:12px;color:rgba(255,255,255,0.35)">{{ ci.priceStr }} each</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:10px">
+              <div onClick="{{ ci.onRemove }}" style="width:28px;height:28px;border:1px solid rgba(255,255,255,0.14);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;color:rgba(255,255,255,0.5);transition:all 0.2s" style-hover="border-color:#C9A84C;color:#C9A84C">−</div>
+              <span style="font-size:14px;font-weight:600;min-width:16px;text-align:center">{{ ci.qty }}</span>
+              <div onClick="{{ ci.onAdd }}" style="width:28px;height:28px;background:#2D6A4F;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:15px;transition:background 0.2s" style-hover="background:#40916C">+</div>
+            </div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:#C9A84C;min-width:52px;text-align:right">{{ ci.lineStr }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding:20px 28px;border-top:1px solid rgba(255,255,255,0.07)">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:13px;color:rgba(255,255,255,0.45)">Subtotal</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600">{{ cartTotal }}</span>
+        </div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:20px">Free delivery on orders over £25</div>
+        <a href="Damal Order.dc.html" style="display:block;width:100%;background:#2D6A4F;color:#fff;border:none;border-radius:2px;padding:15px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;text-align:center;text-decoration:none;transition:background 0.2s;margin-bottom:10px" style-hover="background:#40916C">Proceed to Checkout →</a>
+        <div onClick="{{ clearCart }}" style="text-align:center;font-size:12px;color:rgba(255,255,255,0.3);cursor:pointer;padding:8px;transition:color 0.2s" style-hover="color:rgba(255,255,255,0.6)">Clear order</div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+
+<!-- FOOTER -->
+<footer style="background:#030A06;padding:48px 60px;border-top:1px solid rgba(255,255,255,0.05)">
+  <div style="max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px">
+    <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:24px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.4">
+    <div style="display:flex;gap:28px">
+      <a href="Damal Home A - Cinematic.dc.html" style="font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Home</a>
+      <a href="Damal About.dc.html" style="font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">About</a>
+      <a href="Damal Gallery.dc.html" style="font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Gallery</a>
+      <a href="Damal Location.dc.html" style="font-size:12px;color:rgba(255,255,255,0.3);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Location</a>
+    </div>
+    <p style="font-size:12px;color:rgba(255,255,255,0.15)">© 2026 Damal Restaurant</p>
+  </div>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { activeCategory: 'all', cart: [], cartOpen: false };
+
+  componentDidMount() {
+    try { const s = localStorage.getItem('damal_cart'); if (s) this.setState({ cart: JSON.parse(s) }); } catch(e) {}
+  }
+
+  componentDidUpdate(_, prev) {
+    if (prev.cart !== this.state.cart) {
+      try { localStorage.setItem('damal_cart', JSON.stringify(this.state.cart)); } catch(e) {}
+    }
+  }
+
+  get allItems() {
+    return [
+      {id:1,cat:'breakfast',name:'Ful Medames',desc:'Fava beans with Somali herbs & spices',price:6,tag:'vegetarian'},
+      {id:2,cat:'breakfast',name:'Lamb Kidney',desc:'Traditional Somali breakfast',price:7,tag:''},
+      {id:3,cat:'breakfast',name:'Beef Sogaar & Bread',desc:'Spiced beef with freshly baked bread',price:7,tag:''},
+      {id:4,cat:'mains',name:'Haniid',desc:'Slow-cooked lamb shank — our signature dish',price:13,tag:'signature'},
+      {id:5,cat:'mains',name:'Quarter Chicken',desc:'Served with rice or pasta',price:9,tag:''},
+      {id:6,cat:'mains',name:'Salmon Fish',desc:'Served with rice or pasta',price:11,tag:''},
+      {id:7,cat:'mains',name:'Beef Sogaar',desc:'Served with rice or pasta',price:10,tag:''},
+      {id:8,cat:'mains',name:'Chicken Sogaar',desc:'Served with rice or pasta',price:10,tag:''},
+      {id:9,cat:'mains',name:'Beef Steak',desc:'Served with rice or pasta',price:11,tag:''},
+      {id:10,cat:'mains',name:'Chicken Steak',desc:'Served with rice or pasta',price:11,tag:''},
+      {id:15,cat:'sides',name:'Sabaayad',desc:'Somali flatbread, similar to Paratha',price:2,tag:''},
+      {id:16,cat:'sides',name:'Canjeero',desc:'Spongy pancake-like bread',price:2,tag:''},
+      {id:17,cat:'sides',name:'Malwaax',desc:'Traditional sweet Somali pancake',price:1,tag:'sweet'},
+      {id:18,cat:'sides',name:'Sambusa',desc:'Crispy pastry with spiced meat filling',price:1.5,tag:''},
+      {id:19,cat:'sides',name:'Rice',desc:'',price:6,tag:''},
+      {id:20,cat:'sides',name:'Pasta',desc:'',price:6,tag:''},
+      {id:21,cat:'drinks',name:'Mango Lassi',desc:'Our signature drink',price:3.5,tag:'signature'},
+      {id:22,cat:'drinks',name:'Shani',desc:'Berry-flavoured carbonated drink',price:2,tag:''},
+      {id:23,cat:'drinks',name:'Soft Drinks',desc:'Fanta, Sprite, Rio, Rubicon',price:1.5,tag:''},
+      {id:24,cat:'drinks',name:'Juices',desc:'Mango, Guava, Cocktail',price:2,tag:''},
+      {id:25,cat:'drinks',name:'Somali Tea',desc:'Traditional spiced tea',price:1.5,tag:''},
+      {id:26,cat:'drinks',name:'Cappuccino / Coffee',desc:'',price:2,tag:''},
+      {id:27,cat:'desserts',name:'Oreo Milk Cake',desc:'',price:5,tag:''},
+      {id:28,cat:'desserts',name:'Lotus Biscoff Cake',desc:'',price:5,tag:''},
+      {id:29,cat:'desserts',name:'Kinder Bueno Cake',desc:'',price:5,tag:''},
+      {id:30,cat:'desserts',name:'Ferrero Rocher Cake',desc:'',price:5,tag:''}
+    ];
+  }
+
+  plattersData = [
+    {id:11,name:'1–2 People Platter',desc:'Lambshank, Quarter Chicken, Beef Sogaar · served with rice',price:30.99,serves:'Serves 1–2',bg:'radial-gradient(ellipse at 40% 50%,rgba(155,68,14,0.88),rgba(78,34,6,0.9),#0F0500)'},
+    {id:12,name:'2–3 People Platter',desc:'Lambshank ×2, Quarter Chicken, Beef Sogaar · served with rice',price:38.99,serves:'Serves 2–3',bg:'radial-gradient(ellipse at 40% 50%,rgba(135,58,12,0.88),rgba(65,28,4,0.9),#0D0400)'},
+    {id:13,name:'4–5 People Platter',desc:'Lambshank ×3, Quarter Chicken, Beef Sogaar · served with rice',price:49.99,serves:'Serves 4–5',bg:'radial-gradient(ellipse at 40% 50%,rgba(155,88,12,0.88),rgba(78,44,2,0.9),#0F0700)'},
+    {id:14,name:'Mega Fusion Platter',desc:'Lambshank ×5, Quarter Chicken ×3, Beef Sogaar · served with rice',price:79.99,serves:'Feeds 6+',bg:'radial-gradient(ellipse at 40% 50%,rgba(120,50,10,0.88),rgba(60,24,2,0.9),#0C0400)'}
+  ];
+
+  gradients = {
+    breakfast:'radial-gradient(ellipse at center,rgba(175,94,26,0.85),rgba(78,34,6,0.92),#0E0600)',
+    mains:'radial-gradient(ellipse at center,rgba(134,54,14,0.85),rgba(56,20,2,0.92),#0C0402)',
+    sides:'radial-gradient(ellipse at center,rgba(92,70,40,0.85),rgba(44,30,10,0.92),#160E04)',
+    drinks:'radial-gradient(ellipse at center,rgba(40,100,72,0.85),rgba(22,52,36,0.92),#060E08)',
+    desserts:'radial-gradient(ellipse at center,rgba(172,112,36,0.85),rgba(96,56,16,0.92),#160600)'
+  };
+
+  fmt(p) { return `£${Number.isInteger(p)?p:p.toFixed(2)}`; }
+
+  addItem(item) {
+    this.setState(s => {
+      const ex = s.cart.find(c => c.id === item.id);
+      return ex ? {cart:s.cart.map(c=>c.id===item.id?{...c,qty:c.qty+1}:c)} : {cart:[...s.cart,{...item,qty:1}]};
+    });
+  }
+
+  removeItem(id) {
+    this.setState(s => {
+      const it = s.cart.find(c=>c.id===id);
+      if(!it) return {};
+      return it.qty<=1?{cart:s.cart.filter(c=>c.id!==id)}:{cart:s.cart.map(c=>c.id===id?{...c,qty:c.qty-1}:c)};
+    });
+  }
+
+  get cartTotal() { return this.state.cart.reduce((s,i)=>s+i.price*i.qty,0); }
+  get cartCount() { return this.state.cart.reduce((s,i)=>s+i.qty,0); }
+
+  renderVals() {
+    const {activeCategory,cart,cartOpen} = this.state;
+    const cats = ['all','breakfast','mains','sides','drinks','desserts'];
+    const catBtns = cats.map(cat => ({
+      label: cat==='all'?'All Dishes':cat.charAt(0).toUpperCase()+cat.slice(1),
+      bg: activeCategory===cat?'#C9A84C':'rgba(255,255,255,0.06)',
+      color: activeCategory===cat?'#0A1F14':'rgba(255,255,255,0.55)',
+      border: activeCategory===cat?'1.5px solid #C9A84C':'1.5px solid rgba(255,255,255,0.08)',
+      onClick: ()=>this.setState({activeCategory:cat})
+    }));
+    const filtered = activeCategory==='all'?this.allItems:this.allItems.filter(i=>i.cat===activeCategory);
+    const menuItems = filtered.map(item=>({...item,priceStr:this.fmt(item.price),hasTag:item.tag!=='',gradient:this.gradients[item.cat]||this.gradients.mains,onAdd:()=>this.addItem(item)}));
+    const cartCount = this.cartCount;
+    const cartItems = cart.map(ci=>({...ci,priceStr:this.fmt(ci.price),lineStr:this.fmt(ci.price*ci.qty),onAdd:()=>this.addItem(ci),onRemove:()=>this.removeItem(ci.id)}));
+    const platters = this.plattersData.map(p=>({...p,priceStr:this.fmt(p.price),onAdd:()=>this.addItem({...p,cat:'platters',desc:p.desc,tag:'platter'})}));
+    return {
+      catBtns,menuItems,platters,cartItems,
+      cartCount,cartTotal:this.fmt(this.cartTotal),
+      hasCart:cartCount>0,cartEmpty:cartCount===0,
+      cartLabel:cartCount>0?`${cartCount} · ${this.fmt(this.cartTotal)}`:'Cart',
+      cartOpen,
+      toggleCart:()=>this.setState(s=>({cartOpen:!s.cartOpen})),
+      clearCart:()=>this.setState({cart:[],cartOpen:false})
+    };
+  }
+}
+</script>
+</body>
+</html>

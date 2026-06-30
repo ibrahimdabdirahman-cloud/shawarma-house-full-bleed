@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+  <style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:'DM Sans',sans-serif;background:#060F0A;color:#fff;overflow-x:hidden;}@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}</style>
+</helmet>
+
+<nav style="position:sticky;top:0;z-index:300;padding:18px 60px;display:flex;align-items:center;justify-content:space-between;background:rgba(6,15,10,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(255,255,255,0.06)">
+  <a href="Damal Home A - Cinematic.dc.html"><img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:27px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.85"></a>
+  <div style="display:flex;align-items:center;gap:36px">
+    <a href="Damal Menu.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Menu</a>
+    <a href="Damal About.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">About</a>
+    <a href="Damal Gallery.dc.html" style="font-size:12px;font-weight:600;color:#C9A84C;text-decoration:none;border-bottom:1px solid #C9A84C;padding-bottom:2px">Gallery</a>
+    <a href="Damal Charity.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Charity</a>
+    <a href="Damal Location.dc.html" style="font-size:12px;font-weight:500;color:rgba(255,255,255,0.5);text-decoration:none;transition:color 0.2s" style-hover="color:#fff">Location</a>
+  </div>
+  <a href="Damal Order.dc.html" style="background:#2D6A4F;color:#fff;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:10px 22px;border-radius:2px;text-decoration:none;transition:background 0.2s" style-hover="background:#40916C">Order Now</a>
+</nav>
+
+<section style="padding:110px 60px 70px;background:linear-gradient(to bottom,#060F0A,#0A1F14);text-align:center">
+  <div style="font-size:10px;font-weight:600;letter-spacing:5px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px">@damalrestaurant</div>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(56px,8vw,96px);font-weight:600;color:#fff;line-height:0.92;margin-bottom:18px">Gallery</h1>
+  <p style="font-size:15px;font-weight:300;color:rgba(255,255,255,0.42);max-width:440px;margin:0 auto">A taste of Damal through our lens. Follow us on Instagram for daily updates.</p>
+</section>
+
+<!-- CATEGORY FILTER -->
+<div style="padding:0 60px 36px;background:#0A1F14;display:flex;gap:8px;flex-wrap:wrap">
+  <sc-for list="{{ filters }}" as="f" hint-placeholder-count="5">
+    <button onClick="{{ f.onClick }}" style="background:{{ f.bg }};color:{{ f.color }};border:{{ f.border }};border-radius:20px;padding:9px 22px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.22s">{{ f.label }}</button>
+  </sc-for>
+</div>
+
+<!-- MASONRY GRID -->
+<section style="padding:0 60px 100px;background:#0A1F14">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:240px;gap:10px;max-width:1280px;margin:0 auto">
+    <sc-for list="{{ photos }}" as="p" hint-placeholder-count="9">
+      <div style="background:{{ p.bg }};border-radius:3px;grid-row:{{ p.span }};position:relative;overflow:hidden;cursor:pointer;transition:opacity 0.25s" style-hover="opacity:0.82">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,31,20,0.7) 0%,transparent 50%)"></div>
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:18px;transform:translateY(8px);transition:transform 0.25s" style-hover="transform:translateY(0)">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:18px;color:#fff;font-style:italic;margin-bottom:3px">{{ p.label }}</div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#C9A84C">{{ p.tag }}</div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+</section>
+
+<!-- INSTAGRAM CTA -->
+<section style="background:#0D2419;padding:80px 60px;text-align:center;border-top:1px solid rgba(255,255,255,0.05)">
+  <div style="font-size:10px;font-weight:600;letter-spacing:4px;text-transform:uppercase;color:#C9A84C;margin-bottom:16px">Follow Along</div>
+  <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,48px);font-weight:600;color:#fff;margin-bottom:12px">@damalrestaurant</h2>
+  <p style="font-size:14px;color:rgba(255,255,255,0.42);margin-bottom:32px">Behind the scenes, new dishes, and the faces behind Damal — all on Instagram</p>
+  <a href="https://www.instagram.com/damalrestaurant/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);color:#fff;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:14px 36px;border-radius:2px;text-decoration:none" rel="noopener">📷 Follow on Instagram</a>
+</section>
+
+<footer style="background:#030A06;padding:28px 60px;border-top:1px solid rgba(255,255,255,0.05);display:flex;justify-content:space-between;align-items:center">
+  <img src="https://damalrestaurant.uk/wp-content/uploads/2024/05/Damal-Logo-Green-417x90.png" alt="Damal" style="height:22px;object-fit:contain;filter:brightness(0) invert(1);opacity:0.35">
+  <p style="font-size:12px;color:rgba(255,255,255,0.15)">© 2026 Damal Restaurant · Videography @ShotsByIman</p>
+</footer>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { activeFilter: 'all' };
+
+  allPhotos = [
+    {id:1,cat:'food',label:'Haniid — Lamb Shank',tag:'Signature Dish',bg:'radial-gradient(ellipse at 40% 50%,rgba(158,72,14,0.9),rgba(88,38,6,0.95),#100500)',span:'span 2'},
+    {id:2,cat:'food',label:'Mega Platter',tag:'Platters',bg:'radial-gradient(ellipse at center,rgba(135,58,12,0.88),rgba(65,26,4,0.94),#0D0400)',span:'span 1'},
+    {id:3,cat:'restaurant',label:'Dining Area',tag:'Restaurant',bg:'radial-gradient(ellipse at center,rgba(30,70,48,0.85),rgba(14,40,26,0.9),#060E08)',span:'span 1'},
+    {id:4,cat:'food',label:'Ful Medames',tag:'Breakfast',bg:'radial-gradient(ellipse at center,rgba(175,94,26,0.88),rgba(78,34,6,0.94),#0E0600)',span:'span 1'},
+    {id:5,cat:'food',label:'Mango Lassi',tag:'Signature Drink',bg:'radial-gradient(ellipse at center,rgba(200,160,40,0.6),rgba(100,70,10,0.8),#180E00)',span:'span 1'},
+    {id:6,cat:'restaurant',label:'Open Kitchen',tag:'Behind the Scenes',bg:'radial-gradient(ellipse at center,rgba(45,90,65,0.8),rgba(20,52,36,0.9),#080F08)',span:'span 1'},
+    {id:7,cat:'food',label:'Milk Cake Selection',tag:'Desserts',bg:'radial-gradient(ellipse at center,rgba(172,112,36,0.88),rgba(96,56,16,0.94),#160600)',span:'span 1'},
+    {id:8,cat:'team',label:'The Damal Team',tag:'People',bg:'radial-gradient(ellipse at center,rgba(35,65,50,0.85),rgba(18,42,30,0.9),#060C08)',span:'span 1'},
+    {id:9,cat:'food',label:'Sabaayad Flatbread',tag:'Sides',bg:'radial-gradient(ellipse at center,rgba(140,90,40,0.8),rgba(70,40,10,0.9),#140A02)',span:'span 1'},
+  ];
+
+  renderVals() {
+    const { activeFilter } = this.state;
+    const filterOpts = ['all','food','restaurant','team'];
+    const filters = filterOpts.map(f => ({
+      label: f === 'all' ? 'All' : f.charAt(0).toUpperCase() + f.slice(1),
+      bg: activeFilter === f ? '#C9A84C' : 'rgba(255,255,255,0.06)',
+      color: activeFilter === f ? '#0A1F14' : 'rgba(255,255,255,0.55)',
+      border: activeFilter === f ? '1.5px solid #C9A84C' : '1.5px solid rgba(255,255,255,0.08)',
+      onClick: () => this.setState({ activeFilter: f })
+    }));
+    const photos = (activeFilter === 'all' ? this.allPhotos : this.allPhotos.filter(p => p.cat === activeFilter))
+      .map(p => ({ ...p, span: p.span || 'span 1' }));
+    return { filters, photos };
+  }
+}
+</script>
+</body>
+</html>
