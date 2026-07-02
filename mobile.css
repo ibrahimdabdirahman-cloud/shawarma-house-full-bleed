@@ -5,6 +5,10 @@ body {
 }
 
 @media (max-width: 760px) {
+  [style*="background: rgb(23, 18, 15); color: rgb(244, 234, 215); overflow: hidden; white-space: nowrap; padding: 16px 0px"] {
+    margin-top: 40px !important;
+  }
+
   nav > div {
     padding: 10px 14px !important;
     gap: 8px !important;
